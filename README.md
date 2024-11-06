@@ -47,9 +47,9 @@ HTTP Response Code | Response
 
 ### /api/login.php
 compulsory to send a POST request with `content-type` set to `application/json` with body format:
-`{<br/>
-    "email":"...",<br/>
-    "password":"...",<br/>
+`{
+    "email":"...",
+    "password":"..."
 }`
 
 returns 
