@@ -4,6 +4,7 @@
 ## Requirements
 
 [XAMPP](https://www.apachefriends.org) 
+
 [Composer](https://getcomposer.org/download/)
 
 ## Creation of `.env` File
@@ -11,11 +12,13 @@
 The `.env` file in the project contains sensitive information such as database credentials and secret keys.
 You should include the following variables in your env file:
 
-`DB_HOST = ''`
-`DB_NAME = ''`
-`DB_USER = ''`
-`DB_PASS = ''`
-`SECRET_KEY = ""`
+<code>
+DB_HOST = ''<br/>
+DB_NAME = ''<br/>
+DB_USER = ''<br/>
+DB_PASS = ''<br/>
+SECRET_KEY = ""<br/>
+</code>
 
 Generate a secret key using `openssl rand -base64 64` in your terminal
 
@@ -33,20 +36,28 @@ compulsory to send a POST request with `content-type` set to `application/json` 
     "name":"..."
 }`
 
-returns 200 on Succesful registration
-        400 on missing any of the above specified three fields or if data is invalid
-        405 on not having POST
-        415 on not having json data in body
+returns 
+
+HTTP Response Code | Response
+--- | ---
+200 | Succesful registration
+400 | missing any of the above specified three fields or if data is invalid
+405 | not having POST
+415 | not having json data in body
 
 ### /api/login.php
 compulsory to send a POST request with `content-type` set to `application/json` with body format:
-`{
-    "email":"...",
-    "password":"...",
+`{<br/>
+    "email":"...",<br/>
+    "password":"...",<br/>
 }`
 
-returns 200 on Correct Credentials
-        400 on missing any of the above specified fields or if data is invalid
-        401 on not existing user or incorrect password
-        405 on not having POST
-        415 on not having json data in body
+returns 
+
+HTTP Response Code | Response
+--- | ---
+200 | Correct Credentials
+400 | missing any of the above specified fields or if data is invalid
+401 | not existing user or incorrect password
+405 | not having POST
+415 | not having json data in body
