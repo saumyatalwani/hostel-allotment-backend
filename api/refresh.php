@@ -33,7 +33,6 @@ try {
 
 $user_id = $payload["sub"];
 
-
 $refresh_token_gateway = new RefreshTokenGateway($database, $_ENV["SECRET_KEY"]);
 
 $refresh_token = $refresh_token_gateway->getByToken($data["token"]);

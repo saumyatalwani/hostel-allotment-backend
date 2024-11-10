@@ -9,11 +9,11 @@ class UserGateway
     {
         $this->conn = $database->getConnection();
     }
-    public function getByID(int $id): array | false
+    public function getByID(string $id): array | false
     {
         $sql = "SELECT *
                 FROM users
-                WHERE id = :id";
+                WHERE Email = :id";
                 
         $stmt = $this->conn->prepare($sql);
         

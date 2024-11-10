@@ -20,7 +20,7 @@ if ($contentType !== 'application/json') {
 
 $data = json_decode(file_get_contents('php://input'), true);
 $conn = $database->getConnection();
-$sql = "INSERT INTO users (Full_Name, Email, Password, Status, Role) VALUES (:name, :email, :password_hash,:status,:role)";
+$sql = "INSERT INTO users (Full_Name, Email, Password, Status, Role, rollNo, gender) VALUES (:name, :email, :password_hash,:status,:role, :roll_no, :gender)";
 
 $stmt = $conn->prepare($sql);
 $password_hash = password_hash($data["password"], PASSWORD_DEFAULT);
@@ -32,7 +32,7 @@ if ($data === null) {
     exit();
 }
 
-if (!array_key_exists('email', $data) || !array_key_exists('password', $data) || !array_key_exists('name', $data)) {
+if (!array_key_exists('email', $data) || !array_key_exists('password', $data) || !array_key_exists('name', $data) || !array_key_exists('rollNo', $data) || !array_key_exists('gender', $data)) {
     http_response_code(400);
     echo json_encode(["message" => "Missing credentials"]);
     exit();
@@ -43,6 +43,8 @@ $stmt->bindValue(":email", $data["email"], PDO::PARAM_STR);
 $stmt->bindValue(":password_hash", $password_hash, PDO::PARAM_STR);
 $stmt->bindValue(":status", "docVerify", PDO::PARAM_STR);
 $stmt->bindValue(":role", "user", PDO::PARAM_STR);
+$stmt->bindValue(":roll_no", $data['rollNo'], PDO::PARAM_STR);
+$stmt->bindValue(":gender", $data['gender'], PDO::PARAM_STR);
 $stmt->execute();
 http_response_code(200);
 echo json_encode([["message" => "user registered succesfully"]]);

@@ -5,7 +5,9 @@ $payload = [
     "name" => $user["Full_Name"],
     "status" => $user["Status"],
     "email"=> $user["Email"],
-    "exp" => time() + 20
+    "rollNo"=> $user["rollNo"],
+    "gender" => $user["gender"],
+    "exp" => time() + 60000
 ];
 
 $JwtController = new Jwt($_ENV["SECRET_KEY"]);

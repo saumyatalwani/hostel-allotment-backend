@@ -12,8 +12,7 @@
 The `.env` file in the project contains sensitive information such as database credentials and secret keys.
 You should include the following variables in your env file:
 
-<code>
-DB_HOST = ''<br/>
+<code>DB_HOST = ''<br/>
 DB_NAME = ''<br/>
 DB_USER = ''<br/>
 DB_PASS = ''<br/>

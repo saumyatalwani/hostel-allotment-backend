@@ -1,15 +1,15 @@
 <?php
 
-class StudentController
+class HostelBatchController
 {
-    public function __construct(private StudentGateway $gateway)
+    public function __construct(private HostelBatchGateway $gateway)
     {
     }
 
-    public function processRequest(string $method): void
+    public function processRequest(string $method,int $batch, string $degree): void
     {
         if ($method == "GET") {
-            echo json_encode($this->gateway->getAllStudents());
+            echo json_encode($this->gateway->getHostel($batch,$degree));
             exit;
         }else{
             $this->methodNotAllowed("GET");
