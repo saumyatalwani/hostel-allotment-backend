@@ -46,4 +46,12 @@ class IdGateway
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function checkFilled($email){
+        $sql = 'SELECT * FROM hostel_id where email = :email';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->rowCount()>0;
+    }
 }

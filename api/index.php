@@ -40,6 +40,19 @@ switch ($resource){
         $controller = new RoomController($gateway);
         $controller->processRequest($_SERVER['REQUEST_METHOD'],$hostel,$block);
         break;
+
+    case "checkFilled":
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            http_response_code(405);
+            header('ALLOW: GET');
+            echo "ALLOW get";
+            exit();
+        }
+        $email=$payloadData['email'];
+        $idGateway=new IdGateway($database);
+        echo json_encode(["message"=>$idGateway->checkFilled($email)]);
+        break;
+
     
     case "SelectRoom":
         if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
