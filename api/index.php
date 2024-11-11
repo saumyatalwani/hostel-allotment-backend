@@ -91,6 +91,8 @@ switch ($resource){
                     http_response_code(400);
                     echo json_encode(["message"=>$message]);
                     exit;
+                }else{
+                    $data[$bed]='r'.$data[$bed];
                 }
             }
         }
@@ -121,6 +123,103 @@ switch ($resource){
         $controller->checkReserved($_SERVER['REQUEST_METHOD'],$rollNo);
         break;
     
+    case "complaint":
+
+        $complaintGateway=new complaintGateway($database);
+
+        switch($_SERVER['REQUEST_METHOD']){
+            case "GET":
+                $role=$payloadData['role'];
+
+                if($role!='admin'){
+                    http_response_code(401);
+                    echo json_encode(["message"=>"Unauthorized"]);
+                }
+
+                echo json_encode($complaintGateway->fetchAllJoin());
+
+                break;
+            case "PUT":
+                $role=$payloadData['role'];
+    
+                if($role!='admin'){
+                    http_response_code(401);
+                    echo json_encode(["message"=>"Unauthorized"]);
+                }
+                $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+                    if ($contentType !== 'application/json') {
+                        http_response_code(415);
+                        echo json_encode(["message" => "Only JSON content is supported"]);
+                        exit();
+                    }
+                    
+                    $data = json_decode(file_get_contents('php://input'), true);
+                    
+                    if ($data === null) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "Invalid JSON data"]);
+                        exit();
+                    }
+
+                    if (!array_key_exists('id', $data)){
+                        http_response_code(400);
+                        echo json_encode(["message" => "Missing data"]);
+                        exit();
+                    }
+
+                    echo json_encode($complaintGateway->mark($data['id']));
+                    
+                break;
+            case "POST":
+                $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+                    if ($contentType !== 'application/json') {
+                        http_response_code(415);
+                        echo json_encode(["message" => "Only JSON content is supported"]);
+                        exit();
+                    }
+                    
+                    $data = json_decode(file_get_contents('php://input'), true);
+                    
+                    if ($data === null) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "Invalid JSON data"]);
+                        exit();
+                    }
+
+                    if (!array_key_exists('email', $data) || !array_key_exists('complaintType', $data) || !array_key_exists('description', $data) || !array_key_exists('phoneNo', $data)){
+                        http_response_code(400);
+                        echo json_encode(["message" => "Missing data"]);
+                        exit();
+                    }
+
+                    if (!filter_var($data['phoneNo'], FILTER_VALIDATE_INT)) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "Phone must be an integer"]);
+                        exit();
+                    }
+                    
+                    $number = intval($data['phoneNo']);
+
+                    $result = $complaintGateway->insert($data['email'],$data['complaintType'],$data['description'],$number);
+
+                    if ($result==true){
+                        echo json_encode(["message"=>"Success"]);
+                    }else{
+                        http_response_code(500);
+                        echo json_encode(["message"=>"Failure"]);
+                    }
+
+
+
+                break;
+
+            default:
+                break;
+        }
+        break;
+    
     case "getHostelBatch":
         $batch = isset($_GET['batch']) ? trim($_GET['batch']) : '';
         $degree = isset($_GET['degree']) ? trim($_GET['degree']) : '';
@@ -145,6 +244,63 @@ switch ($resource){
         $controller->processRequest($_SERVER['REQUEST_METHOD'],$number,$degree);
         break;
     
+        case "HostelBatch":
+
+            $role=$payloadData['role'];
+
+            if($role!='admin'){
+                http_response_code(401);
+                echo json_encode(["message"=>"Unauthorized"]);
+            }
+
+            $gateway = new HostelBatchGateway($database);
+            $controller = new HostelBatchController($gateway);
+
+            switch($_SERVER['REQUEST_METHOD']){
+                case "GET":
+                    $controller->getAll();
+                    break;
+                case "POST":
+                    $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+                    if ($contentType !== 'application/json') {
+                        http_response_code(415);
+                        echo json_encode(["message" => "Only JSON content is supported"]);
+                        exit();
+                    }
+                    
+                    $data = json_decode(file_get_contents('php://input'), true);
+                    
+                    if ($data === null) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "Invalid JSON data"]);
+                        exit();
+                    }
+
+                    if (!array_key_exists('batch', $data) || !array_key_exists('hostel', $data) || !array_key_exists('degree', $data)){
+                        http_response_code(400);
+                        echo json_encode(["message" => "Missing data"]);
+                        exit();
+                    }
+
+                    if (!filter_var($data['batch'], FILTER_VALIDATE_INT)) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "Batch must be an integer"]);
+                        exit();
+                    }
+                    
+                    $number = intval($data['batch']);
+
+                    $controller->add($number,$data['degree'],$data['hostel']);
+                    break;
+                default:
+                    http_response_code(405);
+
+            }
+            
+            
+            break;
+    
     case "getHostelGender":
         if($_SERVER['REQUEST_METHOD']=='GET'){
         $gender=$payloadData['gender'];
@@ -167,7 +323,138 @@ switch ($resource){
         $controller = new HostelBatchController($gateway);
         $controller->processRequest($_SERVER['REQUEST_METHOD'],$number,$degree);*/
         break;
+    case "HostelGender":
 
+            $role=$payloadData['role'];
+
+            if($role!='admin'){
+                http_response_code(401);
+                echo json_encode(["message"=>"Unauthorized"]);
+            }
+
+            $gateway = new HostelGenderGateway($database);
+
+            switch($_SERVER['REQUEST_METHOD']){
+                case "GET":
+                    echo json_encode($gateway->fetchAll());
+                    break;
+                case "POST":
+                    $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+                    if ($contentType !== 'application/json') {
+                        http_response_code(415);
+                        echo json_encode(["message" => "Only JSON content is supported"]);
+                        exit();
+                    }
+                    
+                    $data = json_decode(file_get_contents('php://input'), true);
+                    
+                    if ($data === null) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "Invalid JSON data"]);
+                        exit();
+                    }
+
+                    if (!array_key_exists('block_no', $data) || !array_key_exists('hostel_type', $data) || !array_key_exists('gender', $data)){
+                        http_response_code(400);
+                        echo json_encode(["message" => "Missing data"]);
+                        exit();
+                    }
+
+                    echo json_encode($gateway->insert($data['gender'],$data['hostel_type'],$data['block_no']));
+                    break;
+                default:
+                    http_response_code(405);
+
+            }
+            
+            
+            break;
+
+        case "users":
+
+                $role=$payloadData['role'];
+    
+                if($role!='admin'){
+                    http_response_code(401);
+                    echo json_encode(["message"=>"Unauthorized"]);
+                }
+    
+                $gateway = new UserGateway($database);
+
+    
+                switch($_SERVER['REQUEST_METHOD']){
+                    case "GET":
+                        echo json_encode($gateway->fetchAllJoin());
+                        break;
+                    default:
+                        http_response_code(405);
+                
+                    }
+                break;
+        case "idForm":
+
+            $gateway = new IdGateway($database);
+    
+        
+            switch($_SERVER['REQUEST_METHOD']){
+                case "GET":
+                    $role=$payloadData['role'];
+        
+                    if($role!='admin'){
+                        http_response_code(401);
+                        echo json_encode(["message"=>"Unauthorized"]);
+                    }
+                    echo json_encode($gateway->fetchAllJoin());
+                    break;
+                case "POST":
+                    $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+                    if ($contentType !== 'application/json') {
+                        http_response_code(415);
+                        echo json_encode(["message" => "Only JSON content is supported"]);
+                        exit();
+                    }
+                    
+                    $data = json_decode(file_get_contents('php://input'), true);
+                    
+                    if ($data === null) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "Invalid JSON data"]);
+                        exit();
+                    }
+
+                    if (!array_key_exists('email', $data) || !array_key_exists('address', $data) || !array_key_exists('studentPhone', $data) || !array_key_exists('parentPhone', $data)){
+                        http_response_code(400);
+                        echo json_encode(["message" => "Missing data"]);
+                        exit();
+                    }
+
+                    if (!filter_var($data['studentPhone'], FILTER_VALIDATE_INT) || !filter_var($data['parentPhone'], FILTER_VALIDATE_INT)) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "phone must be an integer"]);
+                        exit();
+                    }
+            
+                    $number1 = intval($data['studentPhone']);
+                    $number2 = intval($data['parentPhone']);
+
+                    $result=$gateway ->insert($data['email'],$number1,$number2,$data['address']);
+
+                    if($result==true){
+                        echo json_encode(["message"=>"success"]);
+                    }else{
+                        http_response_code(500);
+                        echo json_encode(["message"=>"Failure"]);
+                    }
+
+
+                    break;
+                default:
+                    http_response_code(405);
+                    
+            }
+            break;
     
     
     case "uploadDocs":

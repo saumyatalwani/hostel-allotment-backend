@@ -7,6 +7,7 @@ $payload = [
     "email"=> $user["Email"],
     "rollNo"=> $user["rollNo"],
     "gender" => $user["gender"],
+    "role" => $user["Role"],
     "exp" => time() + 60000
 ];
 

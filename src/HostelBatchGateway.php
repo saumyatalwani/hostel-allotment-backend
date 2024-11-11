@@ -20,4 +20,25 @@ class HostelBatchGateway
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function fetchAll(){
+        $sql = "SELECT * FROM batchHostel";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function insert(int $batch, string $degree, string $hostel){
+        $sql = "INSERT INTO batchHostel (batch, degree, hostel) values (:batch, :degree, :hostel)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':batch', $batch, PDO::PARAM_INT);
+        $stmt->bindValue(':degree', $degree, PDO::PARAM_STR);
+        $stmt->bindValue(':hostel', $hostel, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $data = $this->fetchAll();
+
+        return $data;
+        
+    }
 }
