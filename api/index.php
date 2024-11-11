@@ -52,6 +52,60 @@ switch ($resource){
         $idGateway=new IdGateway($database);
         echo json_encode(["message"=>$idGateway->checkFilled($email)]);
         break;
+    
+    case "rooms":
+        $roomGateway = new RoomGateway($database);
+        switch($_SERVER['REQUEST_METHOD']){
+            case "GET":
+                $role=$payloadData['role'];
+
+                if($role!='admin'){
+                    http_response_code(401);
+                    echo json_encode(["message"=>"Unauthorized"]);
+                }
+
+                echo json_encode($roomGateway->getAllRooms());
+
+                break;
+            case "POST":
+                $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+                    if ($contentType !== 'application/json') {
+                        http_response_code(415);
+                        echo json_encode(["message" => "Only JSON content is supported"]);
+                        exit();
+                    }
+                    
+                    $data = json_decode(file_get_contents('php://input'), true);
+                    
+                    if ($data === null) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "Invalid JSON data"]);
+                        exit();
+                    }
+
+                    if (!array_key_exists('hostel_type', $data) || !array_key_exists('block_no', $data) || !array_key_exists('room_no', $data)){
+                        http_response_code(400);
+                        echo json_encode(["message" => "Missing data"]);
+                        exit();
+                    }
+
+                    if (!filter_var($data['room_no'], FILTER_VALIDATE_INT)) {
+                        http_response_code(400);
+                        echo json_encode(["message" => "Phone must be an integer"]);
+                        exit();
+                    }
+                    
+                    $number = intval($data['room_no']);
+
+                    echo json_encode($roomGateway->insert($number,$data['block_no'],$data['hostel_type']));
+                break;
+
+            default:
+                break;
+        }
+        break;
+
 
     
     case "SelectRoom":

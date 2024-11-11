@@ -105,6 +105,38 @@ public function getReserved($rollNo) {
     }
 }
 
+public function getAllRooms(){
+    try {
+        $sql = "SELECT * FROM room order by block_no,room_no;";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(["message"=>$e->getMessage()]);
+        return [];
+    }
+}
+
+public function insert($room_no,$block_no,$hostel_type){
+    try {
+        $sql = "INSERT INTO room (room_no, block_no, hostel_type) VALUES (:room_no, :block_no, :hostel_type);";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':room_no', $room_no, PDO::PARAM_INT);
+        $stmt->bindValue(':block_no', $block_no, PDO::PARAM_STR);
+        $stmt->bindValue(':hostel_type', $hostel_type, PDO::PARAM_STR);
+        $stmt->execute();
+        return $this->getAllRooms();
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(["message"=>$e->getMessage()]);
+        //return false;
+    }
+}
+
 
 
 }
