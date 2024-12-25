@@ -1,0 +1,851 @@
+{
+	"info": {
+		"_postman_id": "ade9e222-e30b-4322-8aef-5ae381258e20",
+		"name": "Hostel Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26455569"
+	},
+	"item": [
+		{
+			"name": "Login&Register",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"moksha@gmail.com\",\n    \"password\":\"hello123\",\n    \"name\":\"Moksha\",\n    \"rollNo\":\"22BCP366\",\n    \"gender\":\"female\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/register.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"register.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"admin@gmail.com\",\n    \"password\":\"hello123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/login.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"login.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXVteWFAZ21haWwuY29tIiwiZXhwIjoxNzMxNTc0MzkxfQ.Aq07onazpJQRtX-ITa_NY_ZJBGh9elrPVLvgHaXqYTY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/refresh.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"refresh.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Room",
+			"item": [
+				{
+					"name": "getAllRooms",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXVteWFAZ21haWwuY29tIiwibmFtZSI6IlNhdW15YSBUYWx3YW5pIiwic3RhdHVzIjoic2VsZWN0Um9vbSIsImVtYWlsIjoic2F1bXlhQGdtYWlsLmNvbSIsInJvbGxObyI6IjIyQkNQMzY1IiwiZ2VuZGVyIjoibWFsZSIsImV4cCI6MTczMTIwODYwN30.nQbsbGSzk84sdTXW3fxcF2zBjJN_tb682skNZLAd1o8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/getAllRooms?block=A2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"getAllRooms"
+							],
+							"query": [
+								{
+									"key": "block",
+									"value": "A2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rooms",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxNDA1MzA2fQ.eEDCUFvOVf0UuzUIjZUo-gU00bD4IKIzUuO1mI3UKMU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/rooms",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rooms",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxNDA1MzA2fQ.eEDCUFvOVf0UuzUIjZUo-gU00bD4IKIzUuO1mI3UKMU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"room_no\":102,\n    \"block_no\":\"C2\",\n    \"hostel_type\":\"Highrise\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/rooms",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SelectRoom",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXVteWFAZ21haWwuY29tIiwibmFtZSI6IlNhdW15YSBUYWx3YW5pIiwic3RhdHVzIjoiUm9vbVNlbGVjdGVkIiwiZW1haWwiOiJzYXVteWFAZ21haWwuY29tIiwicm9sbE5vIjoiMjJCQ1AzNjUiLCJnZW5kZXIiOiJtYWxlIiwiZXhwIjoxNzMxMjg5Njc0fQ.A6UTGn5mwxcdJl4aHWI-PfRHB05DJzuND4Gllx18fAo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomNo\":101,\n    \"hostel\":\"Highrise\",\n    \"block\":\"A2\",\n    \"bed1\":\"22BCP365\",\n    \"bed2\":\"\",\n    \"bed3\":\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/SelectRoom",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"SelectRoom"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReserved",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXVteWFAZ21haWwuY29tIiwibmFtZSI6IlNhdW15YSBUYWx3YW5pIiwic3RhdHVzIjoic2VsZWN0Um9vbSIsImVtYWlsIjoic2F1bXlhQGdtYWlsLmNvbSIsInJvbGxObyI6IjIyQkNQMzY1IiwiZ2VuZGVyIjoibWFsZSIsImV4cCI6MTczMTI4NzU3MH0.Fym4Xl8NxxB9CMyc5jo4i1MKxsX1NWCYq6KdlsZmDgo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/getReserved",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"getReserved"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DocUpload",
+			"item": [
+				{
+					"name": "getHostelfromBatch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXVteWFAZ21haWwuY29tIiwibmFtZSI6IlNhdW15YSBUYWx3YW5pIiwic3RhdHVzIjoiZG9jVmVyaWZ5IiwiZW1haWwiOiJzYXVteWFAZ21haWwuY29tIiwiZXhwIjoxNzMxMTk0NDAwfQ.t6Y-H2oRNWKgWMJ9exQaaKGN9jU7sP5HZuf9JeSDmMo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/getHostelBatch?batch=22&degree=B",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"getHostelBatch"
+							],
+							"query": [
+								{
+									"key": "batch",
+									"value": "22"
+								},
+								{
+									"key": "degree",
+									"value": "B"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "uploadDocs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXVteWFAZ21haWwuY29tIiwibmFtZSI6IlNhdW15YSBUYWx3YW5pIiwic3RhdHVzIjoiZG9jVmVyaWZ5IiwiZW1haWwiOiJzYXVteWFAZ21haWwuY29tIiwiZXhwIjoxNzMxMTk0NDAwfQ.t6Y-H2oRNWKgWMJ9exQaaKGN9jU7sP5HZuf9JeSDmMo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rollno\":\"22BCP365\",\n    \"hostel\":\"highrise\",\n    \"email\":\"saumya@gmail.com\",\n    \"fee_receipt\":\"\",\n    \"allotment_letter\":\"\",\n    \"passport_photo\":\"\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/uploadDocs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"uploadDocs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hostel ID Form",
+			"item": [
+				{
+					"name": "Check Filled",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXVteWFAZ21haWwuY29tIiwibmFtZSI6IlNhdW15YSBUYWx3YW5pIiwic3RhdHVzIjoiUm9vbVNlbGVjdGVkIiwiZW1haWwiOiJzYXVteWFAZ21haWwuY29tIiwicm9sbE5vIjoiMjJCQ1AzNjUiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzEzODA3NjZ9.eycZjWOn4qbsSdw8bSOSPdojB2LXXdFHM48T6vmqI-s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/checkFilled",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"checkFilled"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HostelID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxMzA0NDMzfQ.2uH8hncDdg2ZDKV2a5EPJy2nrZvl0f9p-fUI9Od8HHk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/idForm",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"idForm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HostelID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxMzA0NDMzfQ.2uH8hncDdg2ZDKV2a5EPJy2nrZvl0f9p-fUI9Od8HHk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"studentPhone\": \"7990735222\",\n    \"address\": \"A-74,SHRINATH SOCIETY,ADAJAN GAM,SURAT-395009\",\n    \"parentPhone\": \"9825143171\",\n    \"email\": \"saumya@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/idForm",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"idForm"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Complaints",
+			"item": [
+				{
+					"name": "Complaint",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxMzczNzY0fQ.4EjPH64PIP_7pU6qLXwJCa3cNDR4_zKFSRTsni0JAAo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/complaint",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"complaint"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complaint",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxMzc0NDI5fQ.lUP6U05JwcX-ZlGmrs5TopmN_i2RRp90foC8gkfa3rs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/complaint",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"complaint"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complaint",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxMzc0NDI5fQ.lUP6U05JwcX-ZlGmrs5TopmN_i2RRp90foC8gkfa3rs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"complaintType\": \"Carpentry\",\n    \"description\": \"gsdg\",\n    \"phoneNo\": \"67\",\n    \"email\": \"saumya@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/complaint",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"complaint"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hostel",
+			"item": [
+				{
+					"name": "Hostel Batch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXVteWFAZ21haWwuY29tIiwibmFtZSI6IlNhdW15YSBUYWx3YW5pIiwic3RhdHVzIjoiUm9vbVNlbGVjdGVkIiwiZW1haWwiOiJzYXVteWFAZ21haWwuY29tIiwicm9sbE5vIjoiMjJCQ1AzNjUiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzE0MDM1Mjd9.MtiLUcuEE-Szj6Xy1I68u3qtgZ5WBwjcqOBPv7rXi78",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/HostelBatch",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"HostelBatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hostel Batch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxMzA0NDMzfQ.2uH8hncDdg2ZDKV2a5EPJy2nrZvl0f9p-fUI9Od8HHk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"batch\":23,\n    \"degree\":\"M\",\n    \"hostel\":\"UG\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/HostelBatch",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"HostelBatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBlocks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXVteWFAZ21haWwuY29tIiwibmFtZSI6IlNhdW15YSBUYWx3YW5pIiwic3RhdHVzIjoic2VsZWN0Um9vbSIsImVtYWlsIjoic2F1bXlhQGdtYWlsLmNvbSIsInJvbGxObyI6IjIyQkNQMzY1IiwiZ2VuZGVyIjoibWFsZSIsImV4cCI6MTczMTIwODUxN30.2pmyj_I3DiYNOPYuvQo_7fy6BIo0KOrYpmksEZlK6Vs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/getHostelGender",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"getHostelGender"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HostelGender",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxMzA0NDMzfQ.2uH8hncDdg2ZDKV2a5EPJy2nrZvl0f9p-fUI9Od8HHk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/HostelGender",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"HostelGender"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HostelGender",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxMzA0NDMzfQ.2uH8hncDdg2ZDKV2a5EPJy2nrZvl0f9p-fUI9Od8HHk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hostel_type\":\"Highrise\",\n    \"block_no\":\"A4\",\n    \"gender\":\"male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/hostel/api/HostelGender",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"hostel",
+								"api",
+								"HostelGender"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJuYW1lIjoiQWRtaW4iLCJzdGF0dXMiOiJkb2NWZXJpZnkiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGxObyI6IjAwMDAwMDAiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzMxMzA0NDMzfQ.2uH8hncDdg2ZDKV2a5EPJy2nrZvl0f9p-fUI9Od8HHk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/hostel/api/users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"hostel",
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
